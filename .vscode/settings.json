@@ -12,9 +12,16 @@
     "cmake.buildDirectory": "${sourceDirectory}/build",
     "cmake.autoSelectActiveFolder": false,
     "cmake.options.advanced": {
-        "folder": { "statusBarVisibility": "visible" },
-        "variant": { "statusBarVisibility": "compact" }
+        "folder": {
+            "statusBarVisibility": "visible"
+        },
+        "variant": {
+            "statusBarVisibility": "compact"
+        }
     },
     "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
-    "lldb.launch.initCommands": ["command script import ${workspaceRoot}/extra/natvis.py"],
+    "lldb.launch.initCommands": [
+        "command script import ${workspaceRoot}/extra/natvis.py"
+    ],
+    "editor.formatOnSave": false,
 }
