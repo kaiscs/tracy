@@ -35,7 +35,7 @@ class DummyBuild(build_ext):
 
 setup(
     name=MODULE_NAME,
-    version="0.10.0",
+    version="0.12.2",
     author="Bartosz Taudul",
     author_email="wolf@nereid.pl",
     description="A real time, nanosecond resolution, remote telemetry, hybrid frame and sampling profiler for games and other applications.",

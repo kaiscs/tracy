@@ -1879,7 +1879,7 @@ void Profiler::Worker()
             if( m_broadcast )
             {
                 const auto t = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-                if( t - lastBroadcast > 3000000000 )  // 3s
+                if( t - lastBroadcast > 10000000000 )  // 10s
                 {
                     m_programNameLock.lock();
                     if( m_programName )

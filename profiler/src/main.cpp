@@ -573,7 +573,7 @@ static void UpdateBroadcastClients()
             while( it != clients.end() )
             {
                 const auto diff = time - it->second.time;
-                if( diff > 4000 )  // 4s
+                if( diff > 30000 )  // 30s
                 {
                     it = clients.erase( it );
                 }
