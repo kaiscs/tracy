@@ -9,7 +9,7 @@
 #  if defined _WIN32
 #    define TRACY_SAMPLING_HZ 8000
 #  elif defined __linux__
-#    define TRACY_SAMPLING_HZ 10000
+#    define TRACY_SAMPLING_HZ 100
 #  endif
 #endif
 
@@ -1412,7 +1412,7 @@ void SysTraceWorker( void* ptr )
                             //   u32 size
                             //   u8  data[size]
                             // Data (not ABI stable, but has not changed since it was added, in 2009):
-                            //   u8  hdr[8]
+                            //   u8  hdr[12]
                             //   u8  prev_comm[16]
                             //   u32 prev_pid
                             //   u32 prev_prio
@@ -1428,6 +1428,7 @@ void SysTraceWorker( void* ptr )
                             offset += sizeof( uint64_t );
                             const auto traceOffset = offset;
                             offset += sizeof( uint64_t ) * cnt + sizeof( uint32_t ) + 8 + 16;
+                            offset += 4; // 4 bytes additional in header due to common_preempt_lazy_count
 
                             uint32_t prev_pid, prev_prio;
                             uint32_t next_pid, next_prio;
@@ -1437,6 +1438,7 @@ void SysTraceWorker( void* ptr )
                             offset += sizeof( uint32_t );
                             ring.Read( &prev_prio, offset, sizeof( uint32_t ) );
                             offset += sizeof( uint32_t );
+                            offset += sizeof( uint32_t ); // 4 bytes of additional padding in our kernel
                             ring.Read( &prev_state, offset, sizeof( long ) );
                             offset += sizeof( long ) + 16;
                             ring.Read( &next_pid, offset, sizeof( uint32_t ) );
